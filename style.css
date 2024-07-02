@@ -7,10 +7,10 @@ body {
 
 .title{
     font-size: 60px;
-    color: red;
+    color: rgb(46, 241, 55);
 }
 
 .main{
-    margin-top: 200px;
+    margin-top: 300px;
     text-align: center;
 }
