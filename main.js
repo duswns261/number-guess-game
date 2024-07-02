@@ -14,8 +14,9 @@ let userInput = document.getElementById("user-input")
 let resultArea = document.getElementById("result-area")
 let resetButton = document.getElementById("reset-button")
 let chanceArea = document.getElementById("chance-area")
+let historyNum = document.getElementById("history-number")
 
-let chances = 5
+let chances = 3
 let gameOver = false
 let history = []
 
@@ -25,9 +26,26 @@ userInput.addEventListener("focus", function() {
     userInput.value = "";
 })
 
+// 랜덤 숫자를 할당받기 전 로직 및 UI에 사용되는 값들에 대한 초기화
+function initialize() {
+    chances = 3
+    if (playButton.disabled == true){
+        playButton.disabled = false
+    }
+
+    userInput.value = ""
+    resultArea.textContent = "결과값이 여기 나옵니다."
+
+    history = []
+    historyNum.textContent = `입력 : [${history}]`
+}
+
 function pickRandomNum() {
+    initialize()
+
     computerNum = Math.floor(Math.random() * 100)
     console.log("정답" + computerNum)
+    document.getElementById("game-title").textContent = `숫자 맞추기 게임(${computerNum})`
 }
 
 function play() {
@@ -44,6 +62,7 @@ function play() {
     }
 
     history.push(userValue)
+    historyNum.textContent = `입력 : [${history}]`
 
     chances--
     chanceArea.textContent = `남은 기회 : ${chances}번`
@@ -71,11 +90,7 @@ function play() {
 }
 
 function reset() {
-    userInput = ""
-
     pickRandomNum()
-
-    resultArea.textContent = "결과값이 여기 나옵니다."
 }
 
 pickRandomNum();
